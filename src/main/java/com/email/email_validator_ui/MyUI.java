@@ -12,13 +12,6 @@ import com.vaadin.ui.TextField;
 import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
 
-/**
- * This UI is the application entry point. A UI may either represent a browser window 
- * (or tab) or some part of a html page where a Vaadin application is embedded.
- * <p>
- * The UI is initialized using {@link #init(VaadinRequest)}. This method is intended to be 
- * overridden to add component to the user interface and initialize non-component functionality.
- */
 @Theme("mytheme")
 public class MyUI extends UI {
 
@@ -26,16 +19,27 @@ public class MyUI extends UI {
     protected void init(VaadinRequest vaadinRequest) {
         final VerticalLayout layout = new VerticalLayout();
         
-        final TextField name = new TextField();
-        name.setCaption("Type your name here:");
+        final TextField email = new TextField();
+        email.setCaption("Type your email here:");
 
-        Button button = new Button("Click Me");
+        Button button = new Button("Verify Email");
         button.addClickListener( e -> {
-            layout.addComponent(new Label("Thanks " + name.getValue() 
-                    + ", it works!"));
+            
+        	email_validator validator = new email_validator();
+            boolean validation = validator.email_validator(email.getValue());
+            String result = "";
+            
+            if (validation == true) {
+            	result = "Email is valid";
+            }
+            else {
+            	result = "Email is invalid. Please try again.";
+            }
+            
+            layout.addComponent(new Label(result));
         });
         
-        layout.addComponents(name, button);
+        layout.addComponents(email, button);
         layout.setMargin(true);
         layout.setSpacing(true);
         
