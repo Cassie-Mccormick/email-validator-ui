@@ -30,7 +30,7 @@ public class MyUI extends UI {
             String result = "";
             
             if (validation == true) {
-            	result = "Email is valid";
+            	result = "Email is valid.";
             }
             else {
             	result = "Email is invalid. Please try again.";
